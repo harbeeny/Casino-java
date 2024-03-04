@@ -8,7 +8,8 @@ public class Poker {
     Deck deck = new Deck();
     PokerHand playerHand = new PokerHand();
 
-    public Poker() {}
+    public Poker() {
+    }
 
     public void startGame() {
         deck.shuffleDeck();
@@ -24,11 +25,11 @@ public class Poker {
             System.out.println("Choose cards to discard (a=all, n=none):");
             cardsToDiscard = ReadInputFromUser.read();
         } while(!processInput(cardsToDiscard));
+        
+        System.out.println("Your final hand: ");
         playerHand.showHand();
 
-        System.out.println("Evaluating hand..."); // #TODO: Implement this function
-        // Evaluate the hand (assuming you've implemented logic in
-        // PokerHand.evaluateHand)
+        System.out.println("Evaluating hand...");
         System.out.println(playerHand.evaluateHand());
     }
 
