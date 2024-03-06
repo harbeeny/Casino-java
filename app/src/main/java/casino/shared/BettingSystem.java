@@ -1,5 +1,7 @@
 package casino.shared;
 
+// #TODO: Implement the betting system for poker and blackjack 
+
 public class BettingSystem {
     private int balance;
 
