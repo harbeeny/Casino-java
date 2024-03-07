@@ -67,7 +67,7 @@ public class PokerHand {
         return HIGH_CARD;
     }
 
-    private boolean isFlush() {
+    public boolean isFlush() { // Unit test 
         String suit = cards[0].getSuit();
         for (int i = 0; i < cards.length; i++) {
             if (!cards[i].getSuit().equals(suit))
@@ -76,7 +76,7 @@ public class PokerHand {
         return true;
     }
 
-    private boolean isStraight() {
+    public boolean isStraight() { // Unit test for all of the methods
         for (int i = 0; i < cards.length; i++) {
             if (cards[i].getValue() + 1 != cards[i + 1].getValue())
                 return false;
@@ -84,7 +84,7 @@ public class PokerHand {
         return true;
     }
 
-    private Map<Integer, Integer> getValueCounts() {
+    private Map<Integer, Integer> getValueCounts() { // research hashmaps and trie
         Map<Integer, Integer> counts = new HashMap<>();
         for (Card2 card : cards) {
             counts.put(card.getValue(), counts.getOrDefault(card.getValue(), 0) + 1);

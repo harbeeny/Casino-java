@@ -52,9 +52,4 @@ public class Deck {
         }
         return takenCards;
     }
-
-    public ArrayList<Card2> getCards() {
-        return cards;
-    }
-
 }

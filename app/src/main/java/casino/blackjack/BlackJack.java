@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class BlackJack {
     Deck deck = new Deck();
+    BettingSystem betting = new BettingSystem();
 
     // dealer
     Card2 hiddenCard;
@@ -16,10 +17,14 @@ public class BlackJack {
     // player
     ArrayList<Card2> playerHand;
 
-    public BlackJack() {
+    public BlackJack(BettingSystem betting) {
+        this.betting = betting;
     }
 
     public void startGame() {
+
+        betting.promptBet();
+        
         // shuffle
         deck.shuffleDeck();
 
@@ -45,6 +50,9 @@ public class BlackJack {
             hit();
         } else if (input.equals("s")) {
             stay();
+        } else {
+            System.out.println("");
+            
         }
     }
 
@@ -55,7 +63,7 @@ public class BlackJack {
         }
     }
 
-    private void hit() {
+    private void hit() { // #TODO: Remove duplicate code with a while loop
         if (calculateHandSum(playerHand) < 21) {
             Card2 card = deck.takeCard();
             playerHand.add(card);
@@ -115,12 +123,16 @@ public class BlackJack {
         int dealerSum = calculateHandSum(dealerHand);
         if (playerSum > 21) {
             System.out.println("Player Busts. Dealer wins");
+            betting.loseBet();
         } else if (dealerSum > 21 || playerSum > dealerSum) {
             System.out.println("Player wins!");
+            betting.winBet();
         } else if (playerSum == dealerSum) {
             System.out.println("It's a Tie.");
+            betting.tieBet();
         } else {
             System.out.println("Dealer Wins!");
+            betting.loseBet();
         }
     }
 }

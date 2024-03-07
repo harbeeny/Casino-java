@@ -4,11 +4,18 @@
 package casino;
 
 import org.junit.jupiter.api.Test;
+
+import casino.poker.PokerHand;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test void pokerHandIsStraight() {
+        PokerHand classUnderTest = new PokerHand();
+        assertNotNull(classUnderTest.isStraight(), "should be a straight");
+    }
+    @Test void pokerHandIsFlush() {
+        PokerHand classUnderTest = new PokerHand();
+        assertNotNull(classUnderTest.isFlush(), "should be a flush");
     }
 }

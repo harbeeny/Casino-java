@@ -5,22 +5,37 @@ package casino;
 
 import casino.blackjack.BlackJack;
 import casino.poker.Poker;
+import casino.shared.BettingSystem;
 import casino.util.ReadInputFromUser;
 
 public class App {
 
     public static void main(String[] args) {
+        BettingSystem bettingSystem = new BettingSystem(100);
+
         while (true) {
             System.out.println("Welcome to our Casino!");
+            bettingSystem.displayBalance();
             System.out.println("Which game would you like to play?");
             System.out.println("1: Blackjack");
             System.out.println("2: Poker");
+            System.out.println("D: Deposit Money");
             System.out.println("Q: Quit");
-            System.out.print("Please enter your choice (1 or 2): ");
+            System.out.print("Please enter your choice (1, 2, or D): ");
             String input = ReadInputFromUser.read();
+
             if ("Q".equalsIgnoreCase(input)) {
                 System.out.println("Thanks for playing.");
                 break;
+            } else if ("D".equalsIgnoreCase(input)) {
+                System.out.println("Enter amount to deposit: ");
+                String depositInput = ReadInputFromUser.read();
+                try {
+                    int depositAmount = Integer.parseInt(depositInput);
+                    bettingSystem.deposit(depositAmount);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid number for deposit.");
+                }
             }
 
             try {
@@ -29,12 +44,12 @@ public class App {
                 switch (gameChoice) {
                     case 1:
                         System.out.println("You've selected Blackjack. Starting the game...");
-                        BlackJack blackjack = new BlackJack();
+                        BlackJack blackjack = new BlackJack(bettingSystem);
                         blackjack.startGame();
                         break;
                     case 2:
                         System.out.println("You've selected Poker. Starting the game...");
-                        Poker poker = new Poker();
+                        Poker poker = new Poker(bettingSystem);
                         poker.startGame();
                         break;
                     default:
@@ -42,8 +57,8 @@ public class App {
                         break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number (1 or 2).");
+                System.out.println("Invalid input. Please enter a number (1 or 2) or D for deposit.");
             }
-        } 
+        }
     }
 }
