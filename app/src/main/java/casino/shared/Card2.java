@@ -1,15 +1,15 @@
 package casino.shared;
 
 public class Card2 {
-    static final String HEARTS = "hearts";
-    static final String DIAMONDS = "diamonds";
-    static final String CLUBS = "clubs";
-    static final String SPADES = "spades";
+    public static final String HEARTS = "hearts";
+    public static final String DIAMONDS = "diamonds";
+    public static final String CLUBS = "clubs";
+    public static final String SPADES = "spades";
 
     private final int value;
     private final String suit;
 
-    Card2(int value, String suit) {
+    public Card2(int value, String suit) {
         this.value = value;
         this.suit = suit;
     }
@@ -22,8 +22,8 @@ public class Card2 {
         return value;
     }
 
-    // public void setValue(int value) { // setter 
-    //     this.value = value;
+    // public void setValue(int value) { // setter
+    // this.value = value;
     // }
 
     public String getSuit() { // Getter

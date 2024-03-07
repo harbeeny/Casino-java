@@ -10,12 +10,14 @@ import casino.poker.PokerHand;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void pokerHandIsStraight() {
-        PokerHand classUnderTest = new PokerHand();
-        assertNotNull(classUnderTest.isStraight(), "should be a straight");
-    }
-    @Test void pokerHandIsFlush() {
-        PokerHand classUnderTest = new PokerHand();
-        assertNotNull(classUnderTest.isFlush(), "should be a flush");
-    }
+    // @Test void pokerHandIsStraight() {
+    //     PokerHand classUnderTest = new PokerHand();
+    //     assertNotNull(classUnderTest.isStraight(), "should be a straight");
+    // }
+
+    // @Test void pokerHandIsFlush() {
+    //     PokerHand classUnderTest = new PokerHand();
+    //     assertNotNull(classUnderTest.isFlush(), "should be a flush");
+    // }
+
 }

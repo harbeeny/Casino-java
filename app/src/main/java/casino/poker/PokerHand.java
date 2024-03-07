@@ -4,6 +4,7 @@ import casino.shared.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Comparator;
 
 public class PokerHand {
 
@@ -26,11 +27,10 @@ public class PokerHand {
         } else {
             System.out.println("Cannot add more cards");
         }
+        sortHand();
     }
 
     public String evaluateHand() {
-        Arrays.sort(cards, (a, b) -> a.getValue() - b.getValue());
-
         boolean flush = isFlush();
         boolean straight = isStraight();
 
@@ -67,19 +67,21 @@ public class PokerHand {
         return HIGH_CARD;
     }
 
-    public boolean isFlush() { // Unit test 
+    public boolean isFlush() { // Unit test
         String suit = cards[0].getSuit();
         for (int i = 0; i < cards.length; i++) {
-            if (!cards[i].getSuit().equals(suit))
+            if (!cards[i].getSuit().equals(suit)) {
                 return false;
+            }
         }
         return true;
     }
 
     public boolean isStraight() { // Unit test for all of the methods
-        for (int i = 0; i < cards.length; i++) {
-            if (cards[i].getValue() + 1 != cards[i + 1].getValue())
+        for (int i = 0; i < cards.length - 1; i++) {
+            if (cards[i].getValue() + 1 != cards[i + 1].getValue()) {
                 return false;
+            }
         }
         return true;
     }
@@ -94,6 +96,7 @@ public class PokerHand {
 
     public void discardAndReplace(int index, Card2 card) {
         cards[index] = card;
+        sortHand();
     }
 
     public String getCard(int index) {
@@ -112,5 +115,22 @@ public class PokerHand {
         }
     }
 
+    private void sortHand() {
+
+        Arrays.sort(cards, new Comparator<Card2>() {
+            public int compare(Card2 a, Card2 b) {
+                if (a == b) {
+                    return 0;
+                } 
+                if (a == null) {
+                    return 1;
+                }
+                if (b == null) {
+                    return -1;
+                }
+                return a.getValue() - b.getValue();
+            } 
+        });
+    }
 }
 // write code to figure out what user has : later keep track of score

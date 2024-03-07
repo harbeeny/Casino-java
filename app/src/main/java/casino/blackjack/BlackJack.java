@@ -4,7 +4,7 @@ import casino.shared.*;
 import casino.util.ReadInputFromUser;
 import java.util.ArrayList;
 
-public class BlackJack {
+public class BlackJack { // #TODO: unit test Game and refactor code 
     Deck deck = new Deck();
     BettingSystem betting = new BettingSystem();
 
@@ -63,7 +63,7 @@ public class BlackJack {
         }
     }
 
-    private void hit() { // #TODO: Remove duplicate code with a while loop
+    private void hit() {  // #TODO: Remove duplicate code with a while loop
         if (calculateHandSum(playerHand) < 21) {
             Card2 card = deck.takeCard();
             playerHand.add(card);
