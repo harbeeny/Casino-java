@@ -19,15 +19,14 @@ public class Poker {
 
         deck.shuffleDeck();
 
-        System.out.println("Dealing your hand...");
         dealHand();
 
-        System.out.println("Your hand:");
+        System.out.println("Your Hand: ");
         playerHand.showHand();
 
         String cardsToDiscard;
         do {
-            System.out.println("Choose cards to discard (a=all, n=none):");
+            System.out.println("Choose cards to discard (a = all, n = none):");
             cardsToDiscard = ReadInputFromUser.read();
         } while(!processInput(cardsToDiscard));
         
@@ -42,6 +41,7 @@ public class Poker {
     }
 
     private void dealHand() {
+        System.out.println("Dealing your hand...");
         for (int i = 0; i < 5; i++) {
             playerHand.addCard(i, deck.takeCard());
         }
@@ -75,21 +75,21 @@ public class Poker {
 
         if (PokerHand.ROYAL_FLUSH.equals(evaluateHand)) {
             winnings = 500;
-        } else if ("straight flush".equals(evaluateHand)) {
+        } else if (PokerHand.STRAIGHT_FLUSH.equals(evaluateHand)) {
             winnings = 400;
-        } else if ("four of a kind".equals(evaluateHand)) {
+        } else if (PokerHand.FOUR_OF_A_KIND.equals(evaluateHand)) {
             winnings = 350;
-        } else if ("full house".equals(evaluateHand)) {
+        } else if (PokerHand.FULL_HOUSE.equals(evaluateHand)) {
             winnings = 300;
-        } else if ("flush".equals(evaluateHand)) {
+        } else if (PokerHand.FLUSH.equals(evaluateHand)) {
             winnings = 200;
-        } else if ("straight".equals(evaluateHand)) {
+        } else if (PokerHand.STRAIGHT.equals(evaluateHand)) {
             winnings = 150;
-        } else if ("three of a kind".equals(evaluateHand)) {
+        } else if (PokerHand.THREE_OF_A_KIND.equals(evaluateHand)) {
             winnings = 100;
-        } else if ("two pair".equals(evaluateHand)) {
+        } else if (PokerHand.TWO_PAIR.equals(evaluateHand)) {
             winnings = 25;
-        } else if ("one pair".equals(evaluateHand)) {
+        } else if (PokerHand.ONE_PAIR.equals(evaluateHand)) {
             winnings = 10;
         }
 
