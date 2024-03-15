@@ -36,13 +36,13 @@ public class BlackJack {
             System.out.println("Your hand: " + playerHand.getHand() + "(Total: " + playerHand.calculateHandSum() + ")");
             System.out.println("Hit or Stay? (h/s)");
             String input = ReadInputFromUser.read();
-            if ("h".equals(input)) {
+            if (input.equalsIgnoreCase("h")) {
                 hit(playerHand);
                 if (playerHand.calculateHandSum() > 21) {
                     System.out.println("Busted with " + playerHand.calculateHandSum() + "!");
                     return;
                 }
-            } else if ("s".equals(input)) {
+            } else if (input.equalsIgnoreCase("s")) {
                 break;
             }
         }
