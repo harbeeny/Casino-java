@@ -10,12 +10,13 @@ import casino.util.ReadInputFromUser;
 
 public class App {
     private static BettingSystem bettingSystem;
-    public static void main(String[] args) {
+    
+    public void main(String[] args) {
         bettingSystem = new BettingSystem(100);
         runCasino(); 
     }
 
-    private static void runCasino() {
+    private void runCasino() {
 
         while (true) {
             showMenu();
@@ -41,7 +42,7 @@ public class App {
         } 
     }
   
-    private static void showMenu() {
+    private void showMenu() {
         System.out.println("Welcome to our Casino!");
         bettingSystem.displayBalance();
         System.out.println("Which game would you like to play?");
@@ -52,7 +53,7 @@ public class App {
         System.out.print("Please enter your choice (1, 2, or D): ");
     }
 
-    private static void handleDeposit() {
+    private void handleDeposit() {
         System.out.println("Enter amount to deposit: ");
         int depositAmount = positiveInt();
         if (depositAmount > 0) {
@@ -61,7 +62,7 @@ public class App {
         }
     }
 
-    private static int positiveInt() {
+    private int positiveInt() {
         while (true) {
             String input = ReadInputFromUser.read();
             try {
