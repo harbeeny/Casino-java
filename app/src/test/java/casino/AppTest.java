@@ -3,17 +3,20 @@
  */
 package casino;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import casino.poker.PokerHand;
-
-import static org.junit.jupiter.api.Assertions.*;
+import casino.blackjack.BlackJack;
+import casino.poker.Poker;
+import casino.shared.BettingSystem;
 
 class AppTest {
-    // @Test void pokerHandIsStraight() {
-    //     PokerHand classUnderTest = new PokerHand();
-    //     assertNotNull(classUnderTest.isStraight(), "should be a straight");
-    // }
+    @Test void testRunCasinoCaseSensitive() {
+        
+    }
 
     // @Test void pokerHandIsFlush() {
     //     PokerHand classUnderTest = new PokerHand();
