@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import casino.shared.Card2;
 
-
 public class PokerHandTest {
 
     @Test

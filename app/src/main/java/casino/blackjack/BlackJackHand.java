@@ -15,16 +15,21 @@ public class BlackJackHand {
 
     public int calculateHandSum() {
         int sum = 0;
+        int aceCount = 0;
+
         for (Card2 card : hand) {
-            if (card.isAce() && sum + 11 > 21) {
-                sum += 1;
-            } else if (card.isAce()) {
-                sum += 11;
-            } else if (card.isKing() || card.isQueen() || card.isJack()) {
-                sum += 10;
-            } else {
-                sum += card.getValue();
+            int value = card.getValue();
+            if (value > 10) {
+                value = 10;
+            } else if (value == 1) {
+                aceCount++;
+                value = 11;
             }
+            sum += value;
+        }
+        while (sum > 21 && aceCount > 0) {
+            sum -= 10;
+            aceCount--;
         }
         return sum;
     }
