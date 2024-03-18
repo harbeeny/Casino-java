@@ -5,16 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
+import casino.shared.BettingSystem;
 public class BlackJackTest {
+    
     @Test 
     public void testDealerWins() {
-        BlackJackHand blackJackHand = new BlackJackHand();
+        BlackJackHand hand = new BlackJackHand();
 
     }
     
     @Test 
     public void testPlayerWins() {
-        BlackJackHand blackJackHand = new BlackJackHand();
+        BlackJackHand hand = new BlackJackHand();
 
     }
+
 }
