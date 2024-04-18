@@ -36,17 +36,34 @@ public class BettingSystem {
     }
 
     public void promptBet() {
+        while (true) {
         System.out.println("Your balance is $:" + balance);
         System.out.println("Please enter your bet: ");
         String betInput = ReadInputFromUser.read();
+        
+        int betAmount = validateParsedBet(betInput);
+        if (betAmount == -1) continue;
+
+        if (placeBet(betAmount)) {
+            System.out.println("Bet of $" + betAmount + " placed.");
+            break;
+        } else {
+            System.out.println("Could not place a bet of $" + betAmount + ". Please try a different amount.");
+        }
+    }    
+}    
+
+    private int validateParsedBet(String input) {
         try {
-            int betAmount = Integer.parseInt(betInput);
-            if (!placeBet(betAmount)) {
-                return;
+            int betAmount = Integer.parseInt(input);
+            if (betAmount <= 0) {
+                System.out.println("The bet amount must be greater than 0. Please enter a valid number.");
+                return -1;
             }
+            return betAmount;
         } catch (NumberFormatException e) {
             System.out.println("Invalid input for bet. Please enter a valid number.");
-            return;
+            return -1;
         }
     }
 
