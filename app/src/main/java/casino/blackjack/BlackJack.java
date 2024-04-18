@@ -2,125 +2,78 @@ package casino.blackjack;
 
 import casino.shared.*;
 import casino.util.ReadInputFromUser;
-import java.util.ArrayList;
 
-public class BlackJack { // #TODO: unit test Game and refactor code 
+public class BlackJack {
     Deck deck = new Deck();
+    BlackJackHand dealerHand = new BlackJackHand(); 
+    BlackJackHand playerHand = new BlackJackHand();  
     BettingSystem betting = new BettingSystem();
-
-    // dealer
-    Card2 hiddenCard;
-    ArrayList<Card2> dealerHand;
-    int dealerSum;
-    int dealerAceCount;
-
-    // player
-    ArrayList<Card2> playerHand;
 
     public BlackJack(BettingSystem betting) {
         this.betting = betting;
     }
 
     public void startGame() {
-
         betting.promptBet();
-        
-        // shuffle
         deck.shuffleDeck();
-
-        // dealer
-        dealerHand = new ArrayList<>();
-        dealCards(dealerHand, 2);
-        System.out.println("DEALER: ");
-        System.out.println("[" + dealerHand.get(0) + "]"); // hidden card
-        System.out.println(dealerHand.get(1));
-        System.out.println(calculateHandSum(dealerHand));
-
-        // player
-        playerHand = new ArrayList<>();
         dealCards(playerHand, 2);
+        dealCards(dealerHand, 2);
 
-        System.out.println("PLAYER: ");
-        System.out.println(playerHand);
-        System.out.println(calculateHandSum(playerHand));
-
-        System.out.println("Hit or Stay? (h/s)");
-        String input = ReadInputFromUser.read();
-        if (input.equals("h")) {
-            hit();
-        } else if (input.equals("s")) {
-            stay();
-        } else {
-            System.out.println("");
-            
-        }
-    }
-
-    private void dealCards(ArrayList<Card2> hand, int numberOfCards) {
-        for (int i = 0; i < numberOfCards; i++) {
-            Card2 card = deck.takeCard();
-            hand.add(card);
-        }
-    }
-
-    private void hit() {  // #TODO: Remove duplicate code with a while loop
-        if (calculateHandSum(playerHand) < 21) {
-            Card2 card = deck.takeCard();
-            playerHand.add(card);
-
-            int playerSum = calculateHandSum(playerHand);
-            if (playerSum > 21) {
-                System.out.println("Player Hit and recieves: " + card);
-                System.out.println("BUST! Player's total is: " + playerSum + " :(");
-            } else {
-                System.out.println("Hit and recieves: " + card);
-                System.out.println("New total: " + playerSum);
-
-                System.out.println("Hit or Stay? (h/s)");
-                String input = ReadInputFromUser.read();
-                if (input.equals("h")) {
-                    hit();
-                } else if (input.equals("s")) {
-                    stay();
-                }
-            }
-        }
-    }
-
-    private void stay() {
-        System.out.println("STAY: ");
+        playerTurn();
         dealerPlays();
         whoWins();
     }
 
-    private void dealerPlays() {
-        while (calculateHandSum(dealerHand) < 17) {
+    private void dealCards(BlackJackHand hand, int numberOfCards) {
+        for (int i = 0; i < numberOfCards; i++) {
             Card2 card = deck.takeCard();
-            dealerHand.add(card);
-            System.out.println("Dealer draws:" + card);
+            hand.addCard(card);
         }
-        System.out.println("Dealer stays with a hand of " + calculateHandSum(dealerHand));
     }
 
-    private int calculateHandSum(ArrayList<Card2> hand) {
-        int sum = 0;
-        for (Card2 card : hand) {
-            if (card.isAce() && sum + 11 > 21) {
-                sum += 1;
-            } else if (card.isAce()) {
-                sum += 11;
-            } else if (card.isKing() || card.isQueen() || card.isJack()) {
-                sum += 10;
-            } else {
-                sum += card.getValue();
+    private void playerTurn() {
+        while (true) {
+            System.out.println("Your hand: " + playerHand.getHand() + "(Total: " + playerHand.calculateHandSum() + ")");
+            System.out.println("Hit or Stay? (h/s)");
+            String input = ReadInputFromUser.read();
+            if (input.equalsIgnoreCase("h")) {
+                hit(playerHand);
+                if (playerHand.calculateHandSum() > 21) {
+                    System.out.println("Busted with " + playerHand.calculateHandSum() + "!");
+                    return;
+                }
+            } else if (input.equalsIgnoreCase("s")) {
+                break;
             }
         }
-        return sum;
+    }
+
+    private void hit(BlackJackHand hand) {
+        Card2 card = deck.takeCard();
+        hand.addCard(card);
+        System.out.println("Recieved: " + card);
+    }
+
+    // private void stay() {
+    // System.out.println("STAY: ");
+    // dealerPlays();
+    // whoWins();
+    // }
+
+    private void dealerPlays() {
+        System.out.println("Dealer's turn...");
+        while (dealerHand.calculateHandSum() < 17) {
+            hit(dealerHand);
+        }
+        System.out.println("Dealer stays with " + dealerHand.calculateHandSum());
     }
 
     private void whoWins() {
-        int playerSum = calculateHandSum(playerHand);
-        int dealerSum = calculateHandSum(dealerHand);
+        int playerSum = playerHand.calculateHandSum();
+        int dealerSum = dealerHand.calculateHandSum();
+
+        System.out.println("Final Hands: Player: " + playerSum + ", Dealer: " + dealerSum);
+
         if (playerSum > 21) {
             System.out.println("Player Busts. Dealer wins");
             betting.loseBet();
