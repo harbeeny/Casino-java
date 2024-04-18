@@ -79,13 +79,12 @@ public class BettingSystem {
     }
 
     public void winBet() {
-        int winnings = currentBet * 2; // Assuming a 1:1 payout ratio, adjust if necessary
+        int winnings = currentBet * 2; // Assuming a 1:1 payout ratio
         balance += winnings;
         System.out.println("You win! You've earned $" + winnings + ". Current balance: $" + balance);
     }
 
     public void loseBet() {
-        // The bet is already subtracted when the bet was placed.
         System.out.println("You lose. Current balance: $" + balance);
     }
 

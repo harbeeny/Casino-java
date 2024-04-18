@@ -10,10 +10,10 @@ import casino.util.ReadInputFromUser;
 
 public class App {
     private static BettingSystem bettingSystem;
-    
+
     public static void main(String[] args) {
         bettingSystem = new BettingSystem(100);
-        runCasino(); 
+        runCasino();
     }
 
     private static void runCasino() {
@@ -28,20 +28,20 @@ public class App {
                     return;
                 case "D":
                     handleDeposit();
-                    break;    
-                case "1": 
+                    break;
+                case "1":
                     startBlackJack();
-                    break;   
-                case "2": 
+                    break;
+                case "2":
                     startPoker();
-                    break;   
+                    break;
                 default:
                     System.out.println("Invalid choice. Please enter 1, 2, D, or Q.");
-                    break;    
-            } 
-        } 
+                    break;
+            }
+        }
     }
-  
+
     private static void showMenu() {
         System.out.println("Welcome to our Casino!");
         bettingSystem.displayBalance();
@@ -83,12 +83,10 @@ public class App {
         BlackJack blackjack = new BlackJack(bettingSystem);
         blackjack.startGame();
     }
-    
+
     private static void startPoker() {
         System.out.println("You've selected Blackjack. Starting the game...");
         Poker poker = new Poker(bettingSystem);
         poker.startGame();
     }
 }
-
-
