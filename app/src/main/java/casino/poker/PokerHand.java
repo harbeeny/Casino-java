@@ -78,8 +78,23 @@ public class PokerHand {
     }
 
     public boolean isStraight() { // Unit test for all of the methods
-        for (int i = 0; i < cards.length - 1; i++) {
-            if (cards[i].getValue() + 1 != cards[i + 1].getValue()) {
+        sortHand();
+        boolean hasAce = cards[0].getValue() == 1;
+
+        for (int i = 1; i < cards.length; i++) {
+            if (cards[i].getValue() - cards[i - 1].getValue() != 1) {
+                if (hasAce && isAceHighStraight()) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isAceHighStraight() {
+        for (int i = 1; i < cards.length; i++) {
+            if (cards[i].getValue() != 10 + i - 1) {
                 return false;
             }
         }
